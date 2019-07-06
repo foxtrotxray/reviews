@@ -1,5 +1,11 @@
-var mysql = require('mysql');
+var mysql = require('mysql2');
 var faker = require('faker');
+
+
+
+function dateToMySqlDatetime (date) {
+  return date.toISOString().slice(0, 19).replace('T', ' ')
+}
 
 function buildListing () {
   return {
@@ -15,18 +21,18 @@ function buildListing () {
     "value_score": faker.random.number(5)
   }
 }
-function buildReview () {
+function buildReview (listing_id) {
   return {
     "author": faker.name.findName(),
     "icon_url": faker.image.avatar(),
-    "review_date": faker.date.past(),
+    "review_date": dateToMySqlDatetime(faker.date.past()),
     "review_content": faker.lorem.paragraph(),
-    "reply_date": faker.date.past(),
+    "reply_date": dateToMySqlDatetime(faker.date.past()),
     "reply_content": faker.lorem.paragraph(),
-    "listings_id": faker.random.number(100)
+    "listings_id": listing_id
   }
 }
-console.log(buildReview())
+
 function objToInsert (obj, table) {
   var columns = Object.keys(obj).map((val) => '`' + val + '`').join(',')
   var values = Object.values(obj).map(mysql.escape).join(',')
@@ -40,21 +46,20 @@ var connection = mysql.createConnection({
   database : 'reviews_database'
 });
 
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-  console.log('connected as id ' + connection.threadId);
-});
-var sql = objToInsert(buildReview(), 'listings');
 
-console.log(sql)
-connection.query(sql, function (error, results) {
-  if (error) throw error;
-  console.log(results)
-});
+var listingsSql = objToInsert(buildListing(), 'listings');
 
-connection.end(function(err) {
-  console.log('connection closed!')
-});
+console.log(listingsSql)
+connection.promise()
+  .query(listingsSql)
+  .then(([rows, fields]) => {
+    console.log(rows, fields);
+    var rowID = rows.insertId
+      reviewsSql = (objToInsert(buildReview(rowID), 'reviews'));
+      console.log(reviewsSql)
+      connection.promise()
+        .query(reviewsSql)
+        .catch(console.log)
+  })
+  .catch(console.log)
+  .then(() => connection.end())
