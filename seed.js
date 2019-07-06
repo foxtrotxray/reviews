@@ -38,19 +38,20 @@ function objToInsert (obj, table) {
   var values = Object.values(obj).map(mysql.escape).join(',')
   return `INSERT INTO ${table} (${columns}) VALUES (${values});`
 }
-
+ // potentally we want to extract this "pool creation" elsewhere, so if another developer intends
+ // to "seed" the database they would have a single file to modify to their credentials
 async function main () {
   var pool = mysql.createPool({
     host     : 'localhost',
     user     : 'kyle',
     password : '',
     database : 'reviews_database',
-    waitForConnection: true,
     connectionLimit: 100,
     queueLimit: 0
   });
 
-  var queries = [];
+  var listingsQueries = [];
+  var reviewsQueries = [];
 
   for(var i = 0; i < 100; i++) {
     var listingsSql = objToInsert(buildListing(), 'listings');
@@ -68,18 +69,26 @@ async function main () {
           var reviewPromise = pool
             .query(reviewsSql)
             .catch(console.log)
-          queries.push(reviewPromise)
+          reviewsQueries.push(reviewPromise)
         }
+
       })
       .catch(console.log)
 
-      queries.push(queryPromise)
+      listingsQueries.push(queryPromise)
   }
 
-  console.log('waiting for queries to complete')
-  await Promise.all(queries)
-  console.log({ resolved: queries.length })
-  console.log('seed completed!')
+  try {
+    console.log('waiting for listings queries to complete')
+    await Promise.all(listingsQueries)
+    console.log('waiting for reviews queries to complete')
+    await Promise.all(reviewsQueries)
+    console.log({ resolved: reviewsQueries.length })
+    console.log({ resolved: listingsQueries.length })
+    console.log('seed completed!')
+  } catch(error) {
+    console.error(error)
+  }
 
   pool.end()
   console.log('pool closed')
