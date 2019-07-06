@@ -1,4 +1,4 @@
-var mysql = require('mysql2');
+var mysql = require('mysql2/promise');
 var faker = require('faker');
 
 
@@ -39,27 +39,49 @@ function objToInsert (obj, table) {
   return `INSERT INTO ${table} (${columns}) VALUES (${values});`
 }
 
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'kyle',
-  password : '',
-  database : 'reviews_database'
-});
+async function main () {
+  var pool = mysql.createPool({
+    host     : 'localhost',
+    user     : 'kyle',
+    password : '',
+    database : 'reviews_database',
+    waitForConnection: true,
+    connectionLimit: 100,
+    queueLimit: 0
+  });
 
+  var queries = [];
 
-var listingsSql = objToInsert(buildListing(), 'listings');
+  for(var i = 0; i < 100; i++) {
+    var listingsSql = objToInsert(buildListing(), 'listings');
+    var queryPromise = pool
+      .query(listingsSql)
+      .then(([rows, fields]) => {
+        console.log(rows, fields);
 
-console.log(listingsSql)
-connection.promise()
-  .query(listingsSql)
-  .then(([rows, fields]) => {
-    console.log(rows, fields);
-    var rowID = rows.insertId
-      reviewsSql = (objToInsert(buildReview(rowID), 'reviews'));
-      console.log(reviewsSql)
-      connection.promise()
-        .query(reviewsSql)
-        .catch(console.log)
-  })
-  .catch(console.log)
-  .then(() => connection.end())
+        var rowID = rows.insertId
+        var numberOfReviews = faker.random.number({min:10, max:30})
+        console.log({ listingID: rowID, numReviews: numberOfReviews })
+        for (var j = 0; j < numberOfReviews; j++) {
+          reviewsSql = (objToInsert(buildReview(rowID), 'reviews'));
+          console.log(reviewsSql)
+          var reviewPromise = pool
+            .query(reviewsSql)
+            .catch(console.log)
+          queries.push(reviewPromise)
+        }
+      })
+      .catch(console.log)
+
+      queries.push(queryPromise)
+  }
+
+  console.log('waiting for queries to complete')
+  await Promise.all(queries)
+  console.log({ resolved: queries.length })
+  console.log('seed completed!')
+
+  pool.end()
+  console.log('pool closed')
+}
+main();
