@@ -1,13 +1,13 @@
 # Project Name
 
-> Project description
+> Reviews Module for B & B mockup
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/team-200-ok/related-listings
+  - https://github.com/team-200-ok/bookings
+  - https://github.com/team-200-ok/reviews
+  - https://github.com/team-200-ok/gallery-modal-overview
 
 ## Table of Contents
 
