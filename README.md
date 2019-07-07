@@ -38,8 +38,12 @@ npm install -g webpack
 npm install
 ```
 ### Seeding the Database
-1. create a new database through the sql prompt.
+1. create & use a new database through the sql prompt.
 
-2. change the contents of config/connectionConfig.js to reflect the credentials of your database.
+2. in the sql prompt, paste the contents of "database/schemas.sql".
 
-3. "npm run seed" from the "reviews" directory.
+3. change the contents of config/connectionConfig.js to reflect the credentials of your database.
+
+4. "npm run seed" from the "reviews" directory.
+
+5. from the sql prompt, use [SELECT * FROM listings] / [SELECT * FROM reviews] to view all your new data.
