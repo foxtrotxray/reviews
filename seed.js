@@ -1,6 +1,6 @@
 var mysql = require('mysql2/promise');
 var faker = require('faker');
-
+var connectionConfig = require('./config/connectionConfig')
 
 
 function dateToMySqlDatetime (date) {
@@ -41,14 +41,7 @@ function objToInsert (obj, table) {
  // potentally we want to extract this "pool creation" elsewhere, so if another developer intends
  // to "seed" the database they would have a single file to modify to their credentials
 async function main () {
-  var pool = mysql.createPool({
-    host     : 'localhost',
-    user     : 'kyle',
-    password : '',
-    database : 'reviews_database',
-    connectionLimit: 100,
-    queueLimit: 0
-  });
+  var pool = mysql.createPool(connectionConfig);
 
   var listingsQueries = [];
   var reviewsQueries = [];
