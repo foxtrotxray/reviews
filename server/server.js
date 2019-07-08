@@ -23,7 +23,8 @@ server.get('/:listing', function (req, res) {
 });
 
 
-let port  = 9999
-server.listen(port, function() {
-  console.log (`Server Started! port #: ${port}`)
-})
+// let port  = 9999
+// server.listen(port, function() {
+//   console.log (`Server Started! port #: ${port}`)
+// })
+module.exports = server
