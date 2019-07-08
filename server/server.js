@@ -9,22 +9,25 @@ server.get('/:listing/:query', function (req, res) {
   let result = db.connection().execute(`select * from reviews where review_content like ?  AND listings_id = ?;
   `,[`%${req.params.query}%`, req.params.listing], function (err, results, fields) {
     console.log(req.params);
-
-    res.json(results)
+    if (results.length === 0) {
+      res.json('No reviews match your search!')
+    } else {
+      res.json(results)
+    }
   })
 });
 server.get('/:listing', function (req, res) {
   console.log('got a GET!');
-  let result = db.connection().execute(`SELECT * FROM reviews WHERE listings_id = ?`,[req.params.listing], function (err, results, fields) {
-    console.log(req.params);
+  if(req.params.listing <= 100) {
+    let result = db.connection().execute(`SELECT * FROM reviews WHERE listings_id = ?`,[req.params.listing], function (err, results, fields) {
+      console.log(req.params);
 
-    res.json(results)
-  })
+      res.json(results)
+    })
+  } else {
+    console.log('404!')
+    res.sendStatus(404)
+  }
 });
 
-
-// let port  = 9999
-// server.listen(port, function() {
-//   console.log (`Server Started! port #: ${port}`)
-// })
 module.exports = server
