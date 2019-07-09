@@ -6,8 +6,8 @@ server.use(express.urlencoded({ extended: true }))
 
 server.get('/:listing/:query', function (req, res) {
   console.log('got a GET with a query!');
-  let result = db.connection().execute(`select * from reviews where review_content like ?  AND listings_id = ?;
-  `,[`%${req.params.query}%`, req.params.listing], function (err, results, fields) {
+  let result = db.connection().execute(`select * from reviews where reply_content like ? AND listings_id = ? OR review_content like ? AND listings_id = ?;
+  `,[`%${req.params.query}%`,req.params.listing ,`%${req.params.query}%`, req.params.listing], function (err, results, fields) {
     console.log(req.params);
     if (results.length === 0) {
       res.json('No reviews match your search!')
