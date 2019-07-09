@@ -13,7 +13,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?/,
-        include: entryPoint,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
           presets: [
