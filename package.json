@@ -8,7 +8,8 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start":"nodemon ./server/serverKickoff.js",
+    "transpile": "webpack --mode development --watch",
+    "start": "nodemon ./server/serverKickoff.js",
     "seed": "node ./seed.js",
     "test": "jest --detectOpenHandles"
   },
@@ -18,15 +19,20 @@
     "mysql2": "^1.6.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "sequelize": "^5.9.3",
-    "supertest": "^4.0.2"
+    "sequelize": "^5.9.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/preset-env": "^7.5.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.8.0",
+    "babel-loader": "^8.0.6",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "jest": "^24.8.0",
     "puppeteer": "^1.18.1",
+    "supertest": "^4.0.2",
     "webpack": "^4.35.2",
     "webpack-cli": "^3.3.5"
   }
