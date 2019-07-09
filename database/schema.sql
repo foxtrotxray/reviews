@@ -25,9 +25,7 @@ CREATE TABLE `reviews` (
 );
 
 -- ---
--- Table 'listings'
---
--- ---
+-- Table 'listings'-- ---
 
 DROP TABLE IF EXISTS `listings`;
 
@@ -58,10 +56,3 @@ ALTER TABLE `reviews` ADD FOREIGN KEY (listings_id) REFERENCES `listings` (`id`)
 
 -- ALTER TABLE `reviews` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- ALTER TABLE `listings` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ---
--- Test Data
--- ---
-
-INSERT INTO `listings` (`id`,`location_name`,`owner_name`,`owner_icon_url`,`review_score`,`accuracy_score`,`communication_score`,`cleanliness_score`,`location_score`,`check_in_score`,`value_score`) VALUES ('1','the-pit','gothyPants','www.thePit.com',3,3,3.5,2.5,3,3,3);
-INSERT INTO `reviews` (`id`,`author`,`icon_url`,`review_date`,`review_content`,`reply_date`,`reply_content`,`listings_id`) VALUES (1,'yung Keezy','www.wedontbelieveinGnomes.com/',NOW(),'Absolutely smashing! had the time of my life!',NOW(),'we\'re happy you enjoyed it!',1);

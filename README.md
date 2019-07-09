@@ -24,6 +24,7 @@
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
+- MySQL2
 - etc
 
 ## Development
@@ -36,4 +37,13 @@ From within the root directory:
 npm install -g webpack
 npm install
 ```
+### Seeding the Database
+1. create & use a new database through the sql prompt.
 
+2. in the sql prompt, paste the contents of "database/schemas.sql".
+
+3. change the contents of config/connectionConfig.js to reflect the credentials of your database.
+
+4. "npm run seed" from the "reviews" directory.
+
+5. from the sql prompt, use [SELECT * FROM listings] / [SELECT * FROM reviews] to view all your new data.

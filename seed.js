@@ -1,7 +1,13 @@
-var mysql = require('mysql');
+var mysql = require('mysql2/promise');
 var faker = require('faker');
+var connectionConfig = require('./config/connectionConfig')
 
-function buildUser () {
+
+function dateToMySqlDatetime (date) {
+  return date.toISOString().slice(0, 19).replace('T', ' ')
+}
+
+function buildListing () {
   return {
     "location_name": faker.address.streetAddress(),
     "owner_name": faker.name.findName(),
@@ -15,34 +21,69 @@ function buildUser () {
     "value_score": faker.random.number(5)
   }
 }
+function buildReview (listing_id) {
+  return {
+    "author": faker.name.findName(),
+    "icon_url": faker.image.avatar(),
+    "review_date": dateToMySqlDatetime(faker.date.past()),
+    "review_content": faker.lorem.paragraph(),
+    "reply_date": dateToMySqlDatetime(faker.date.past()),
+    "reply_content": faker.lorem.paragraph(),
+    "listings_id": listing_id
+  }
+}
 
 function objToInsert (obj, table) {
   var columns = Object.keys(obj).map((val) => '`' + val + '`').join(',')
   var values = Object.values(obj).map(mysql.escape).join(',')
   return `INSERT INTO ${table} (${columns}) VALUES (${values});`
 }
+ // potentally we want to extract this "pool creation" elsewhere, so if another developer intends
+ // to "seed" the database they would have a single file to modify to their credentials
+async function main () {
+  var pool = mysql.createPool(connectionConfig);
 
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'kyle',
-  password : '',
-  database : 'reviews_database'
-});
+  var listingsQueries = [];
+  var reviewsQueries = [];
 
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
+  for(var i = 0; i < 100; i++) {
+    var listingsSql = objToInsert(buildListing(), 'listings');
+    var queryPromise = pool
+      .query(listingsSql)
+      .then(([rows, fields]) => {
+        console.log(rows, fields);
+
+        var rowID = rows.insertId
+        var numberOfReviews = faker.random.number({min:10, max:30})
+        console.log({ listingID: rowID, numReviews: numberOfReviews })
+        for (var j = 0; j < numberOfReviews; j++) {
+          reviewsSql = (objToInsert(buildReview(rowID), 'reviews'));
+          console.log(reviewsSql)
+          var reviewPromise = pool
+            .query(reviewsSql)
+            .catch(console.log)
+          reviewsQueries.push(reviewPromise)
+        }
+
+      })
+      .catch(console.log)
+
+      listingsQueries.push(queryPromise)
   }
-  console.log('connected as id ' + connection.threadId);
-});
-var sql = objToInsert(buildUser(), 'listings');
-console.log(sql)
-connection.query(sql, function (error, results) {
-  if (error) throw error;
-  console.log(results)
-});
 
-connection.end(function(err) {
-  console.log('connection closed!')
-});
+  try {
+    console.log('waiting for listings queries to complete')
+    await Promise.all(listingsQueries)
+    console.log('waiting for reviews queries to complete')
+    await Promise.all(reviewsQueries)
+    console.log({ resolved: reviewsQueries.length })
+    console.log({ resolved: listingsQueries.length })
+    console.log('seed completed!')
+  } catch(error) {
+    console.error(error)
+  }
+
+  pool.end()
+  console.log('pool closed')
+}
+main();
