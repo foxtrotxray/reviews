@@ -1,5 +1,5 @@
 const supertest = require('supertest');
-const server = require('./server.js');
+const server = require('../server/server.js');
 
 describe('GET /1', function() {
   it('responds with json & matches length', function(done) {
@@ -7,7 +7,7 @@ describe('GET /1', function() {
       .get('/1')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
-      .expect('Content-Length', '15514')
+      .expect('Content-Length', '127176')
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);
@@ -32,7 +32,7 @@ describe('GET /1/nihil', function() {
       .get('/1/nihil')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
-      .expect('Content-Length', '3672')
+      .expect('Content-Length', '40948')
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);

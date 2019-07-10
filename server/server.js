@@ -16,11 +16,11 @@ server.get('/:listing/:query', function (req, res) {
   {
     let secondSelect = db.connection().execute(`SELECT * FROM listings WHERE id = ?`, [req.params.listing], function (err, results2, fields) {
       let output = Object.assign(results1, results2)
-      // if (Object.keys(output).length <= 1) {
-      //   res.json('No reviews match your search!')
-      // } else {
+      if (Object.keys(output).length <= 1) {
+        res.json('No reviews match your search!')
+      } else {
         res.json(output)
-      // }
+      }
     })
 
     console.log(req.params);

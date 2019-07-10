@@ -10,7 +10,7 @@
   "scripts": {
     "transpile": "webpack --mode development --watch",
     "start": "nodemon ./server/serverKickoff.js",
-    "seed": "node ./seed.js",
+    "seed": "node ./database/seed.js",
     "test": "jest --detectOpenHandles"
   },
   "dependencies": {

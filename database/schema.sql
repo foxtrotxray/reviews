@@ -1,14 +1,3 @@
--- ---
--- Globals
--- ---
-
--- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
--- SET FOREIGN_KEY_CHECKS=0;
-
--- ---
--- Table 'reviews'
---
--- ---
 
 DROP TABLE IF EXISTS `reviews`;
 
@@ -23,9 +12,6 @@ CREATE TABLE `reviews` (
   `listings_id` INTEGER(15) NOT NULL,
   PRIMARY KEY (`id`)
 );
-
--- ---
--- Table 'listings'-- ---
 
 DROP TABLE IF EXISTS `listings`;
 
@@ -44,15 +30,4 @@ CREATE TABLE `listings` (
   PRIMARY KEY (`id`)
 );
 
--- ---
--- Foreign Keys
--- ---
-
 ALTER TABLE `reviews` ADD FOREIGN KEY (listings_id) REFERENCES `listings` (`id`);
-
--- ---
--- Table Properties
--- ---
-
--- ALTER TABLE `reviews` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `listings` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

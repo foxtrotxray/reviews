@@ -1,7 +1,7 @@
 var mysql = require('mysql2/promise');
 var faker = require('faker');
-var connectionConfig = require('./config/connectionConfig')
-
+var connectionConfig = require('../config/connectionConfig')
+faker.seed(0);
 
 function dateToMySqlDatetime (date) {
   return date.toISOString().slice(0, 19).replace('T', ' ')
@@ -54,7 +54,7 @@ async function main () {
         console.log(rows, fields);
 
         var rowID = rows.insertId
-        var numberOfReviews = faker.random.number({min:10, max:30})
+        var numberOfReviews = faker.random.number({min:100, max:300})
         console.log({ listingID: rowID, numReviews: numberOfReviews })
         for (var j = 0; j < numberOfReviews; j++) {
           reviewsSql = (objToInsert(buildReview(rowID), 'reviews'));
