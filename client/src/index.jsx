@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app.jsx';
-ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-);
+fetch("http://localhost:9999/8")
+.then(response => response.json())
+.then(data => {
+  ReactDOM.render(
+    <App data={data}/>,
+    document.getElementById('app')
+    );
+  })

@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./client/src/components/Overbar.jsx":
+/*!*******************************************!*\
+  !*** ./client/src/components/Overbar.jsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _starDisplay_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./starDisplay.jsx */ \"./client/src/components/starDisplay.jsx\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nfunction Overbar(props) {\n  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(\"div\", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(\"strong\", null, props.reviewCount, \" Reviews\"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_starDisplay_jsx__WEBPACK_IMPORTED_MODULE_0__[\"default\"], {\n    starCount: props.reviewScore\n  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(\"input\", {\n    placeholder: \"Search reviews\",\n    type: \"text\"\n  }));\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Overbar);\n\n//# sourceURL=webpack:///./client/src/components/Overbar.jsx?");
+
+/***/ }),
+
 /***/ "./client/src/components/app.jsx":
 /*!***************************************!*\
   !*** ./client/src/components/app.jsx ***!
@@ -94,7 +106,19 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nclass App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      searchMode: false,\n      currentReviewsPage: 1\n    };\n  }\n\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"h1\", null, \"Hello, world!\"));\n  }\n\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack:///./client/src/components/app.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _starDisplay_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./starDisplay.jsx */ \"./client/src/components/starDisplay.jsx\");\n/* harmony import */ var _Overbar_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Overbar.jsx */ \"./client/src/components/Overbar.jsx\");\n\n\n\n\nclass App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {\n  constructor(props) {\n    super(props);\n    console.log(props);\n    this.state = {\n      searchMode: false,\n      currentReviewsPage: 1\n    };\n  }\n\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Overbar_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {\n      reviewCount: this.props.data.length - 1,\n      reviewScore: this.props.data[0].review_score\n    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", null, \"Accuracy\", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_starDisplay_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      starCount: this.props.data[0].accuracy_score\n    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", null, \"Location\", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_starDisplay_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      starCount: this.props.data[0].location_score\n    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", null, \"Communication\", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_starDisplay_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      starCount: this.props.data[0].communication_score\n    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", null, \"Check-in\", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_starDisplay_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      starCount: this.props.data[0].check_in_score\n    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", null, \"Cleanliness\", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_starDisplay_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      starCount: this.props.data[0].cleanliness_score\n    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", null, \"Value\", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_starDisplay_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      starCount: this.props.data[0].value_score\n    }))));\n  }\n\n}\n\n;\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack:///./client/src/components/app.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/starDisplay.jsx":
+/*!***********************************************!*\
+  !*** ./client/src/components/starDisplay.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nfunction StarDisplay(props) {\n  let output = [];\n\n  for (let i = 0; i < props.starCount; i++) {\n    output.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n      src: \"newTealStar.png\",\n      width: \"18px\",\n      height: \"18px\",\n      key: i\n    }));\n  }\n\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", null, output);\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (StarDisplay);\n\n//# sourceURL=webpack:///./client/src/components/starDisplay.jsx?");
 
 /***/ }),
 
@@ -106,7 +130,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _components_app_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/app.jsx */ \"./client/src/components/app.jsx\");\n\n\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_app_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), document.getElementById('app'));\n\n//# sourceURL=webpack:///./client/src/index.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _components_app_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/app.jsx */ \"./client/src/components/app.jsx\");\n\n\n\nfetch(\"http://localhost:9999/8\").then(response => response.json()).then(data => {\n  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_app_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {\n    data: data\n  }), document.getElementById('app'));\n});\n\n//# sourceURL=webpack:///./client/src/index.jsx?");
 
 /***/ }),
 
