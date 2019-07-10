@@ -1,6 +1,7 @@
 import React from 'react';
 import StarDisplay from  './starDisplay.jsx'
 import Overbar from  './Overbar.jsx'
+import ScoreOverview from './ScoreOverview.jsx'
 
 
 class App extends React.Component {
@@ -19,14 +20,7 @@ class App extends React.Component {
         </div>
 
         <div>
-        <span>Accuracy<StarDisplay starCount={this.props.data[0].accuracy_score}/></span>
-        <span>Location<StarDisplay starCount={this.props.data[0].location_score}/></span>
-        <div></div>
-        <span>Communication<StarDisplay starCount={this.props.data[0].communication_score}/></span>
-        <span>Check-in<StarDisplay starCount={this.props.data[0].check_in_score}/></span>
-        <div></div>
-        <span>Cleanliness<StarDisplay starCount={this.props.data[0].cleanliness_score}/></span>
-        <span>Value<StarDisplay starCount={this.props.data[0].value_score}/></span>
+          <ScoreOverview listingData={this.props.data[0]}/>
         </div>
       </div>)
   }
