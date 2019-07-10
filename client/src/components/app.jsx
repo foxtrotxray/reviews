@@ -2,7 +2,8 @@ import React from 'react';
 import StarDisplay from  './starDisplay.jsx'
 import Overbar from  './Overbar.jsx'
 import ScoreOverview from './ScoreOverview.jsx'
-
+import Review from './Review.jsx'
+import ReviewList from './ReviewList.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -22,6 +23,11 @@ class App extends React.Component {
         <div>
           <ScoreOverview listingData={this.props.data[0]}/>
         </div>
+
+        <div>
+          <ReviewList data={this.props.data} />
+        </div>
+
       </div>)
   }
 };

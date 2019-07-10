@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app.jsx';
-fetch("http://localhost:9999/8")
+fetch("http://localhost:9999/10/nihil")
 .then(response => response.json())
 .then(data => {
   ReactDOM.render(
