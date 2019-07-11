@@ -10,26 +10,34 @@ class ReviewList extends React.Component {
     this.resetPageNumber = this.resetPageNumber.bind(this);
     this.finalPageNumber = this.finalPageNumber.bind(this);
   }
-  incrementPageNumber() {
+
+  incrementPageNumber(mult = 1) {
+      this.setState((state) => {
+        return {reviewPageNumber: state.reviewPageNumber + (mult * 7)}
+      });
+
+    // else {
+    //   this.setState((state) => {
+    //     return {reviewPageNumber: state.reviewPageNumber + 7}
+    //   });
+    // }
+  }
+
+
+  decrementPageNumber(mult = 1) {
     this.setState((state) => {
-      return {reviewPageNumber: state.reviewPageNumber + 7}
+      return {reviewPageNumber: state.reviewPageNumber - (mult * 7)}
     });
   }
-  decrementPageNumber() {
-    this.setState((state) => {
-      return {reviewPageNumber: state.reviewPageNumber - 7}
-    });
-  }
+
   resetPageNumber () {
     this.setState({reviewPageNumber:1})
   }
 
   finalPageNumber () {
     let target = this.props.data.length -1;
-    console.log(target)
     target -= target % 7;
     target ++;
-    console.log(target)
     this.setState({reviewPageNumber:target});
   }
 
@@ -45,48 +53,125 @@ class ReviewList extends React.Component {
         <div>
           {output}
 
-          <span>  {(((this.state.reviewPageNumber -1)/7)+1)}  </span>
+          <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
 
-          <button onClick={this.incrementPageNumber}>go to {(((this.state.reviewPageNumber -1)/7)+2)}</button>
+          <button onClick={() => {this.incrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7)+2)}</button>
+
+          <button onClick={() => {this.incrementPageNumber(2)}}>{(((this.state.reviewPageNumber -1)/7)+3)}</button>
+
+          <span> ... </span>
 
           <button onClick={this.finalPageNumber}>{Math.ceil((this.props.data.length -1)/7)}</button>
 
-          <button onClick={this.incrementPageNumber}>{'>>>>'}</button>
+          <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
 
         </div>
         )
-    } else if (!this.props.data[this.state.reviewPageNumber + 7]) {
+    }
+    else if (this.state.reviewPageNumber === 8) {
+      return (
+        <div>
+        {output}
+
+        <button onClick={() => {this.decrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7))}</button>
+
+        <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+
+        <button onClick={() => {this.incrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7)+2)}</button>
+
+        <span> ... </span>
+
+        <button onClick={this.finalPageNumber}>{Math.ceil((this.props.data.length -1)/7)}</button>
+
+        <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
+
+      </div>
+      )
+    }
+     else if (this.state.reviewPageNumber === 15) {
+      return (
+        <div>
+        {output}
+
+
+        <button onClick={() => {this.decrementPageNumber(2)}}>{(((this.state.reviewPageNumber -1)/7)-1)}</button>
+
+        <button onClick={() => {this.decrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7))}</button>
+
+        <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+
+        <button onClick={() => {this.incrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7)+2)}</button>
+
+        <span> ... </span>
+
+        <button onClick={this.finalPageNumber}>{Math.ceil((this.props.data.length -1)/7)}</button>
+
+        <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
+
+      </div>
+      )
+    }
+     else if (this.state.reviewPageNumber === 22) {
+      return (
+        <div>
+        {output}
+
+
+        <button onClick={() => {this.decrementPageNumber(3)}}>{(((this.state.reviewPageNumber -1)/7)-1)-1}</button>
+
+        <button onClick={() => {this.decrementPageNumber(2)}}>{(((this.state.reviewPageNumber -1)/7)-1)}</button>
+
+        <button onClick={() => {this.decrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7))}</button>
+
+        <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+
+        <button onClick={() => {this.incrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7)+2)}</button>
+
+        <span> ... </span>
+
+        <button onClick={this.finalPageNumber}>{Math.ceil((this.props.data.length -1)/7)}</button>
+
+        <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
+
+      </div>
+      )
+    }
+    else if (!this.props.data[this.state.reviewPageNumber + 7]) {
       return(
         <div>
           {output}
-          <button onClick={this.decrementPageNumber}>{'<<<<'}</button>
+          <button onClick={() => {this.decrementPageNumber()}}>{'<<<<'}</button>
 
           <button onClick={this.resetPageNumber}>1</button>
 
-          <button onClick={this.decrementPageNumber}>go to {((this.state.reviewPageNumber -1)/7)}</button>
+          <button onClick={() => {this.decrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)}</button>
 
-          <span>  {(((this.state.reviewPageNumber -1)/7)+1)}  </span>
+          <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
 
         </div>
         )
     } else {
       return(
-      <div>
+        <div>
         {output}
 
-        <button onClick={this.decrementPageNumber}>{'<<<<'}</button>
+        <button onClick={() => {this.decrementPageNumber()}}>{'<<<<'}</button>
 
         <button onClick={this.resetPageNumber}>1</button>
 
-        <button onClick={this.decrementPageNumber}>go to {((this.state.reviewPageNumber -1)/7)}</button>
+        <span> ... </span>
 
-        <span>  {(((this.state.reviewPageNumber -1)/7)+1)}  </span>
+        <button onClick={() => {this.decrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)}</button>
 
-        <button onClick={this.incrementPageNumber}>go to {(((this.state.reviewPageNumber -1)/7)+2)}</button>
+        <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+
+        <button onClick={() => {this.incrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7)+2)}</button>
+
+        <span> ... </span>
 
         <button onClick={this.finalPageNumber}>{Math.ceil((this.props.data.length -1)/7)}</button>
 
-        <button onClick={this.incrementPageNumber}>{'>>>>'}</button>
+        <button onClick={() => {this.incrementPageNumber()}}>{'>>>>'}</button>
 
       </div>
       )
