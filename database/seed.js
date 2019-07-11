@@ -6,7 +6,9 @@ faker.seed(0);
 function dateToMySqlDatetime (date) {
   return date.toISOString().slice(0, 19).replace('T', ' ')
 }
-
+function input (val, chance) {
+ return chance > 0.8 ? val: null;
+}
 function buildListing () {
   return {
     "location_name": faker.address.streetAddress(),
@@ -22,13 +24,14 @@ function buildListing () {
   }
 }
 function buildReview (listing_id) {
+  let replyChance = Math.random()
   return {
     "author": faker.name.findName(),
     "icon_url": faker.image.avatar(),
     "review_date": dateToMySqlDatetime(faker.date.past()),
     "review_content": faker.lorem.paragraph(),
-    "reply_date": dateToMySqlDatetime(faker.date.past()),
-    "reply_content": faker.lorem.paragraph(),
+    "reply_date": input(dateToMySqlDatetime(faker.date.past()), replyChance),
+    "reply_content": input(faker.lorem.paragraph(), replyChance),
     "listings_id": listing_id
   }
 }
