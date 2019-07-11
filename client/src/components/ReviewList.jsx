@@ -140,9 +140,14 @@ class ReviewList extends React.Component {
       return(
         <div>
           {output}
+
           <button onClick={() => {this.decrementPageNumber()}}>{'<<<<'}</button>
 
           <button onClick={this.resetPageNumber}>1</button>
+
+          <span> ... </span>
+
+          <button onClick={() => {this.decrementPageNumber(2)}}>{((this.state.reviewPageNumber -1)/7)-1}</button>
 
           <button onClick={() => {this.decrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)}</button>
 
@@ -150,7 +155,81 @@ class ReviewList extends React.Component {
 
         </div>
         )
-    } else {
+      }
+    else if (!this.props.data[this.state.reviewPageNumber + 14]) {
+      return(
+        <div>
+          {output}
+
+          <button onClick={() => {this.decrementPageNumber()}}>{'<<<<'}</button>
+
+          <button onClick={this.resetPageNumber}>1</button>
+
+          <span> ... </span>
+
+          <button onClick={() => {this.decrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)}</button>
+
+          <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+
+          <button onClick={() => {this.incrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)+2}</button>
+
+          <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
+
+        </div>
+        )
+    }
+    else if (!this.props.data[this.state.reviewPageNumber + 21]) {
+      return(
+        <div>
+          {output}
+
+          <button onClick={() => {this.decrementPageNumber()}}>{'<<<<'}</button>
+
+          <button onClick={this.resetPageNumber}>1</button>
+
+          <span> ... </span>
+
+          <button onClick={() => {this.decrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)}</button>
+
+          <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+
+          <button onClick={() => {this.incrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)+2}</button>
+
+          <button onClick={() => {this.incrementPageNumber(2)}}>{((this.state.reviewPageNumber -1)/7)+3}</button>
+
+          <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
+
+        </div>
+        )
+    }
+    else if (!this.props.data[this.state.reviewPageNumber + 28]) {
+      return(
+        <div>
+          {output}
+
+          <button onClick={() => {this.decrementPageNumber()}}>{'<<<<'}</button>
+
+          <button onClick={this.resetPageNumber}>1</button>
+
+          <span> ... </span>
+
+          <button onClick={() => {this.decrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)}</button>
+
+          <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+
+          <button onClick={() => {this.incrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)+2}</button>
+
+          <button onClick={() => {this.incrementPageNumber(2)}}>{((this.state.reviewPageNumber -1)/7)+3}</button>
+
+          <button onClick={() => {this.incrementPageNumber(3)}}>{((this.state.reviewPageNumber -1)/7)+4}</button>
+
+          <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
+
+        </div>
+        )
+    }
+
+    else {
       return(
         <div>
         {output}
