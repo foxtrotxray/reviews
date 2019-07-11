@@ -73,6 +73,8 @@ class ReviewList extends React.Component {
         <div>
         {output}
 
+        <button onClick={() => {this.decrementPageNumber()}}>{'<<<<'}</button>
+
         <button onClick={() => {this.decrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7))}</button>
 
         <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
@@ -93,6 +95,7 @@ class ReviewList extends React.Component {
         <div>
         {output}
 
+        <button onClick={() => {this.decrementPageNumber()}}>{'<<<<'}</button>
 
         <button onClick={() => {this.decrementPageNumber(2)}}>{(((this.state.reviewPageNumber -1)/7)-1)}</button>
 
@@ -116,6 +119,7 @@ class ReviewList extends React.Component {
         <div>
         {output}
 
+        <button onClick={() => {this.decrementPageNumber()}}>{'<<<<'}</button>
 
         <button onClick={() => {this.decrementPageNumber(3)}}>{(((this.state.reviewPageNumber -1)/7)-1)-1}</button>
 
