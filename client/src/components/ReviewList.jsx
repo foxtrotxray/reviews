@@ -15,12 +15,6 @@ class ReviewList extends React.Component {
       this.setState((state) => {
         return {reviewPageNumber: state.reviewPageNumber + (mult * 7)}
       });
-
-    // else {
-    //   this.setState((state) => {
-    //     return {reviewPageNumber: state.reviewPageNumber + 7}
-    //   });
-    // }
   }
 
 
@@ -44,6 +38,8 @@ class ReviewList extends React.Component {
   render() {
     let output =[]
     let counter = 0
+    let page = (this.state.reviewPageNumber -1) / 7
+    let last = Math.ceil((this.props.data.length -1)/7)
     for (let i = this.state.reviewPageNumber; i < this.state.reviewPageNumber + 7; i++) {
       if (!this.props.data[i]) {break}
       output.push(<Review key={this.props.data[i].id} listingData={this.props.data[0]} reviewData={this.props.data[i]}/>)
@@ -53,15 +49,15 @@ class ReviewList extends React.Component {
         <div>
           {output}
 
-          <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+          <button>  {page+1}  </button>
 
-          <button onClick={() => {this.incrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7)+2)}</button>
+          <button onClick={() => {this.incrementPageNumber()}}>{page+2}</button>
 
-          <button onClick={() => {this.incrementPageNumber(2)}}>{(((this.state.reviewPageNumber -1)/7)+3)}</button>
+          <button onClick={() => {this.incrementPageNumber(2)}}>{page+3}</button>
 
           <span> ... </span>
 
-          <button onClick={this.finalPageNumber}>{Math.ceil((this.props.data.length -1)/7)}</button>
+          <button onClick={this.finalPageNumber}>{last}</button>
 
           <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
 
@@ -75,15 +71,15 @@ class ReviewList extends React.Component {
 
         <button onClick={() => {this.decrementPageNumber()}}>{'<<<<'}</button>
 
-        <button onClick={() => {this.decrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7))}</button>
+        <button onClick={() => {this.decrementPageNumber()}}>{page}</button>
 
-        <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+        <button>  {page+1}  </button>
 
-        <button onClick={() => {this.incrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7)+2)}</button>
+        <button onClick={() => {this.incrementPageNumber()}}>{page+2}</button>
 
         <span> ... </span>
 
-        <button onClick={this.finalPageNumber}>{Math.ceil((this.props.data.length -1)/7)}</button>
+        <button onClick={this.finalPageNumber}>{last}</button>
 
         <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
 
@@ -97,17 +93,17 @@ class ReviewList extends React.Component {
 
         <button onClick={() => {this.decrementPageNumber()}}>{'<<<<'}</button>
 
-        <button onClick={() => {this.decrementPageNumber(2)}}>{(((this.state.reviewPageNumber -1)/7)-1)}</button>
+        <button onClick={() => {this.decrementPageNumber(2)}}>{page-1}</button>
 
-        <button onClick={() => {this.decrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7))}</button>
+        <button onClick={() => {this.decrementPageNumber()}}>{page}</button>
 
-        <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+        <button>  {page+1}  </button>
 
-        <button onClick={() => {this.incrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7)+2)}</button>
+        <button onClick={() => {this.incrementPageNumber()}}>{page+2}</button>
 
         <span> ... </span>
 
-        <button onClick={this.finalPageNumber}>{Math.ceil((this.props.data.length -1)/7)}</button>
+        <button onClick={this.finalPageNumber}>{last}</button>
 
         <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
 
@@ -121,19 +117,19 @@ class ReviewList extends React.Component {
 
         <button onClick={() => {this.decrementPageNumber()}}>{'<<<<'}</button>
 
-        <button onClick={() => {this.decrementPageNumber(3)}}>{(((this.state.reviewPageNumber -1)/7)-1)-1}</button>
+        <button onClick={() => {this.decrementPageNumber(3)}}>{page-2}</button>
 
-        <button onClick={() => {this.decrementPageNumber(2)}}>{(((this.state.reviewPageNumber -1)/7)-1)}</button>
+        <button onClick={() => {this.decrementPageNumber(2)}}>{page-1}</button>
 
-        <button onClick={() => {this.decrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7))}</button>
+        <button onClick={() => {this.decrementPageNumber()}}>{page}</button>
 
-        <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+        <button>  {page+1}  </button>
 
-        <button onClick={() => {this.incrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7)+2)}</button>
+        <button onClick={() => {this.incrementPageNumber()}}>{page+2}</button>
 
         <span> ... </span>
 
-        <button onClick={this.finalPageNumber}>{Math.ceil((this.props.data.length -1)/7)}</button>
+        <button onClick={this.finalPageNumber}>{last}</button>
 
         <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
 
@@ -151,11 +147,11 @@ class ReviewList extends React.Component {
 
           <span> ... </span>
 
-          <button onClick={() => {this.decrementPageNumber(2)}}>{((this.state.reviewPageNumber -1)/7)-1}</button>
+          <button onClick={() => {this.decrementPageNumber(2)}}>{page-1}</button>
 
-          <button onClick={() => {this.decrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)}</button>
+          <button onClick={() => {this.decrementPageNumber()}}>{page}</button>
 
-          <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+          <button>  {page+1}  </button>
 
         </div>
         )
@@ -171,11 +167,11 @@ class ReviewList extends React.Component {
 
           <span> ... </span>
 
-          <button onClick={() => {this.decrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)}</button>
+          <button onClick={() => {this.decrementPageNumber()}}>{page}</button>
 
-          <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+          <button>  {page+1}  </button>
 
-          <button onClick={() => {this.incrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)+2}</button>
+          <button onClick={() => {this.incrementPageNumber()}}>{page+2}</button>
 
           <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
 
@@ -193,13 +189,13 @@ class ReviewList extends React.Component {
 
           <span> ... </span>
 
-          <button onClick={() => {this.decrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)}</button>
+          <button onClick={() => {this.decrementPageNumber()}}>{page}</button>
 
-          <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+          <button>  {page+1}  </button>
 
-          <button onClick={() => {this.incrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)+2}</button>
+          <button onClick={() => {this.incrementPageNumber()}}>{page+2}</button>
 
-          <button onClick={() => {this.incrementPageNumber(2)}}>{((this.state.reviewPageNumber -1)/7)+3}</button>
+          <button onClick={() => {this.incrementPageNumber(2)}}>{page+3}</button>
 
           <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
 
@@ -217,15 +213,15 @@ class ReviewList extends React.Component {
 
           <span> ... </span>
 
-          <button onClick={() => {this.decrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)}</button>
+          <button onClick={() => {this.decrementPageNumber()}}>{page}</button>
 
-          <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+          <button>  {page+1}  </button>
 
-          <button onClick={() => {this.incrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)+2}</button>
+          <button onClick={() => {this.incrementPageNumber()}}>{page+2}</button>
 
-          <button onClick={() => {this.incrementPageNumber(2)}}>{((this.state.reviewPageNumber -1)/7)+3}</button>
+          <button onClick={() => {this.incrementPageNumber(2)}}>{page+3}</button>
 
-          <button onClick={() => {this.incrementPageNumber(3)}}>{((this.state.reviewPageNumber -1)/7)+4}</button>
+          <button onClick={() => {this.incrementPageNumber(3)}}>{page+4}</button>
 
           <button onClick={() =>{this.incrementPageNumber()}}>{'>>>>'}</button>
 
@@ -244,15 +240,15 @@ class ReviewList extends React.Component {
 
         <span> ... </span>
 
-        <button onClick={() => {this.decrementPageNumber()}}>{((this.state.reviewPageNumber -1)/7)}</button>
+        <button onClick={() => {this.decrementPageNumber()}}>{page}</button>
 
-        <button>  {(((this.state.reviewPageNumber -1)/7)+1)}  </button>
+        <button>  {page+1}  </button>
 
-        <button onClick={() => {this.incrementPageNumber()}}>{(((this.state.reviewPageNumber -1)/7)+2)}</button>
+        <button onClick={() => {this.incrementPageNumber()}}>{page+2}</button>
 
         <span> ... </span>
 
-        <button onClick={this.finalPageNumber}>{Math.ceil((this.props.data.length -1)/7)}</button>
+        <button onClick={this.finalPageNumber}>{last}</button>
 
         <button onClick={() => {this.incrementPageNumber()}}>{'>>>>'}</button>
 
