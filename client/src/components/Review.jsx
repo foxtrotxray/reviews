@@ -1,4 +1,6 @@
 import React from 'react';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 class Review extends React.Component {
   constructor (props) {
@@ -10,24 +12,24 @@ class Review extends React.Component {
   render() {
     if (this.props.reviewData.reply_content === null) {
       return(
-        <div>
-          <img src={this.props.reviewData.icon_url} width="48px" height="48px" ></img>
-          <span>{this.props.reviewData.author}</span>
-          <span>{this.props.reviewData.review_date}</span>
+        <div className='review'>
+          <img className="icon" src={this.props.reviewData.icon_url} width="48px" height="48px" ></img>
+          <span>{this.props.reviewData.author} </span>
+          <Moment format="MMMM, YYYY" date={this.props.reviewData.review_date} />
           <div>{this.props.reviewData.review_content}</div>
         </div>
       )
     } else {
       return(
-        <div>
-          <img src={this.props.reviewData.icon_url} width="48px" height="48px" ></img>
-          <span>{this.props.reviewData.author}</span>
-          <span>{this.props.reviewData.review_date}</span>
+        <div className='review'>
+          <img className="icon" src={this.props.reviewData.icon_url} width="48px" height="48px" ></img>
+          <span>{this.props.reviewData.author} </span>
+          <Moment format="MMMM, YYYY" date={this.props.reviewData.review_date} />
           <div>{this.props.reviewData.review_content}</div>
 
-          <img src={this.props.listingData.owner_icon_url} width="48px" height="48px" ></img>
-          <span>{this.props.listingData.owner_name}</span>
-          <span>{this.props.reviewData.reply_date}</span>
+          <img className="icon" src={this.props.listingData.owner_icon_url} width="48px" height="48px" ></img>
+          <span>{this.props.listingData.owner_name} </span>
+          <Moment format="MMMM, YYYY" date={this.props.reviewData.reply_date} />
           <div>{this.props.reviewData.reply_content}</div>
         </div>
       )

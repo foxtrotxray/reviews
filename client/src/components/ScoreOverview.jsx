@@ -3,7 +3,7 @@ import StarDisplay from  './starDisplay.jsx'
 
 function ScoreOverview (props) {
   return (
-    <div>
+    <div className="scores">
     <span>Accuracy<StarDisplay starCount={props.listingData.accuracy_score}/></span>
     <span>Location<StarDisplay starCount={props.listingData.location_score}/></span>
     <div></div>
