@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Review from './Review.jsx'
 
 class ReviewList extends React.Component {
@@ -9,28 +10,41 @@ class ReviewList extends React.Component {
     this.decrementPageNumber = this.decrementPageNumber.bind(this);
     this.resetPageNumber = this.resetPageNumber.bind(this);
     this.finalPageNumber = this.finalPageNumber.bind(this);
-    let scrollUp = () => {window.scroll({top: 0, left: 0, behavior: 'smooth'
-  })}
-    // this.componentDidMount = this.componentDidMount.bind(this);
-    // this.myRef = React.createRef()
   }
+
 
   incrementPageNumber(mult = 1) {
       this.setState((state) => {
         return {reviewPageNumber: state.reviewPageNumber + (mult * 7)}
-      }, scrollUp);
+      }
+      , () => {window.scrollTo({
+        top: 100,
+        left: 100,
+        behavior: 'smooth'
+      });}
+      );
   }
 
 
   decrementPageNumber(mult = 1) {
-    this.setState((state) => {
+    this.setState(
+      (state) => {
       return {reviewPageNumber: state.reviewPageNumber - (mult * 7)}
-    });
+      }, () => {window.scrollTo({
+        top: 100,
+        left: 100,
+        behavior: 'smooth'
+      });}
+    );
   }
 
   resetPageNumber () {
     this.setState(
-      {reviewPageNumber:1})
+      {reviewPageNumber:1}, () => {window.scrollTo({
+        top: 100,
+        left: 100,
+        behavior: 'smooth'
+      });})
   }
 
   finalPageNumber () {
@@ -39,9 +53,6 @@ class ReviewList extends React.Component {
     target ++;
     this.setState({reviewPageNumber:target});
   }
-  // componentDidMount() {
-  //   window.scroll({top: 0, left: 0, behavior: 'smooth'
-  // })};
 
   render() {
     let output =[]
@@ -60,7 +71,7 @@ class ReviewList extends React.Component {
 
           <a className="centerbutton">  {page+1}  </a>
 
-          <a className="navbutton" onClick={() => {this.incrementPageNumber();}}>{page+2}</a>
+          <a className="navbutton" onClick={() => {this.incrementPageNumber(1);}}>{page+2}</a>
 
           <a className="navbutton" onClick={() => {this.incrementPageNumber(2);}}>{page+3}</a>
 
@@ -68,7 +79,7 @@ class ReviewList extends React.Component {
 
           <a className="navbutton" onClick={() => {this.finalPageNumber();}}>{last}</a>
 
-          <a className="sidewaysbutton" onClick={() =>{this.incrementPageNumber();}}>{'>'}</a>
+          <a className="sidewaysbutton" onClick={() =>{this.incrementPageNumber(1);}}>{'>'}</a>
 
         </div>
         )
