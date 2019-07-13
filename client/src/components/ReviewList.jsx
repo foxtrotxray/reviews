@@ -17,6 +17,7 @@ class ReviewList extends React.Component {
       this.setState((state) => {
         return {reviewPageNumber: state.reviewPageNumber + (mult * 7)}
       }
+
       , () => {window.scrollTo({
         top: 100,
         left: 100,

@@ -58,9 +58,7 @@ background-color: #fff;
 margin: 0;
 }
 
-.icon {
-  border-radius: 50%;
-}
+
 
 .primary {
   display:'flex';
@@ -78,10 +76,6 @@ margin: 0;
 
 .scores {
   display: inline-flex;
-}
-
-.review {
-  border-bottom: 2px solid #949599;
 }
 
 .navbutton {

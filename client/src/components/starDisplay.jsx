@@ -9,6 +9,6 @@ function StarDisplay (props) {
       output.push(<img src='newGreyStar.png' width="18px" height="18px" key={i}></img>)
     }
   }
-  return (<span>{output}</span>)
+  return (<span style={{display:"block flex"}}>{output}</span>)
 }
 export default StarDisplay
