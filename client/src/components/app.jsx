@@ -3,6 +3,7 @@ import Overbar from  './Overbar.jsx'
 import ScoreOverview from './ScoreOverview.jsx'
 import ReviewList from './ReviewList.jsx'
 import Searchbar from './Searchbar.jsx'
+import styles from '../styles/appStyle.css'
 
 
 class App extends React.Component {
@@ -41,10 +42,13 @@ class App extends React.Component {
   }
   render() {
     if ((this.state.searchMode === true) && (this.state.data === 'No reviews match your search!') ) {
-      return (<div className="primary">
+      return (<div className={styles.primary}>
         <div>
           <Overbar reviewCount={this.props.data.length - 1} reviewScore={this.props.data[0].review_score} />
+          <span>
           <Searchbar onKeystroke={this.handleSearchKeystroke}/>
+          </span>
+
         </div>
 
         <div>
@@ -56,7 +60,7 @@ class App extends React.Component {
     }
      else if (this.state.searchMode === true) {
        console.log(this.state.data)
-        return (<div className="primary">
+        return (<div className={styles.primary}>
           <div>
             <Overbar reviewCount={this.props.data.length - 1} reviewScore={this.props.data[0].review_score} />
             <Searchbar onKeystroke={this.handleSearchKeystroke}/>
@@ -72,7 +76,7 @@ class App extends React.Component {
       }
       else {
         return (
-        <div className="primary">
+        <div className={styles.primary}>
           <div>
             <Overbar reviewCount={this.props.data.length - 1} reviewScore={this.props.data[0].review_score} />
             <Searchbar onKeystroke={this.handleSearchKeystroke}/>

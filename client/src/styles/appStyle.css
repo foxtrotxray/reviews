@@ -1,0 +1,9 @@
+.primary {
+  display: flex block !important;
+  -moz-box-direction: normal !important;
+  -moz-box-orient: horizontal !important;
+  flex-direction: row !important;
+  width: 58.3333% !important;
+  max-width: 680px;
+  padding-right: 8px !important;
+}

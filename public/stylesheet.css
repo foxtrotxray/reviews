@@ -57,23 +57,10 @@ color: #484848;
 background-color: #fff;
 margin: 0;
 }
-
-
-
-.primary {
-  display:'flex';
-  border-bottom: 2px solid #949599;
-  height: 150px;
-  margin: 20px;
-  padding: 20px;
-  max-width: 696px;
-}
-
 .search {
   display: inline;
   max-width: 90%;
 }
-
 .scores {
   display: inline-flex;
 }

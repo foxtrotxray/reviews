@@ -1,0 +1,12 @@
+
+.starDisplay {
+  display: -webkit-box;
+  border: rebeccapurple solid 2px;
+  min-width: 110px;
+}
+.star {
+  display: grid;
+  width:18px;
+  height:18px;
+  margin: 2px;
+}
