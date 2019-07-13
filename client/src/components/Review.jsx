@@ -14,14 +14,14 @@ class Review extends React.Component {
   render() {
     if (this.props.reviewData.reply_content === null) {
       return(
-        <div>
+        <div className={styles.review}>
           <div className={styles.flexRow}>
             <img className={styles.icon} src={this.props.reviewData.icon_url}></img>
 
             <span className={styles.flexColumn} >
               {this.props.reviewData.author.split(' ')[0]}
 
-              <Moment className={styles.flexColumn} format="MMMM, YYYY" date={this.props.reviewData.review_date} />
+              <Moment className={styles.flexColumn} format="MMMM YYYY" date={this.props.reviewData.review_date} />
             </span>
           </div>
           <div className={styles.flexColumn} > {this.props.reviewData.review_content}</div>
@@ -30,7 +30,7 @@ class Review extends React.Component {
       )
     } else {
       return(
-        <div>
+        <div className={styles.review}>
 
         <div className={styles.flexColumn}>
           <div className={styles.flexRow}>
@@ -44,12 +44,19 @@ class Review extends React.Component {
         <div className={styles.flexColumn} > {this.props.reviewData.review_content}</div>
 
 
-        <div>
+        <div className={styles.reply} >
 
-          <img className={styles.icon} src={this.props.listingData.owner_icon_url}></img>
-          <span className={styles.flexColumn}>THIS ONE IS A RESPONSE, I'M BEING LOUD  {this.props.listingData.owner_name.split(' ')[0]} </span>
-          <Moment className={styles.flexColumn} format="MMMM, YYYY" date={this.props.reviewData.reply_date} />
+          <img className={styles.replyIcon} src={this.props.listingData.owner_icon_url}></img>
+
+          <span className={styles.flexColumn}>
+            <b className={styles.responseTitle}>
+            Response from {this.props.listingData.owner_name.split(' ')[0]};
+            </b>
+
         <div className={styles.flexColumn} >{this.props.reviewData.reply_content}</div>
+            <Moment className={styles.date} format="MMMM, YYYY" date={this.props.reviewData.reply_date} />
+          </span>
+
         </div>
 
       </div>
