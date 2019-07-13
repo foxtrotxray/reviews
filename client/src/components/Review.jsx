@@ -1,7 +1,7 @@
 import React from 'react';
 import Moment from 'react-moment';
 import 'moment-timezone';
-import styles from '../reviewStyle.css'
+import styles from '../styles/reviewStyle.css'
 
 
 class Review extends React.Component {
@@ -35,7 +35,6 @@ class Review extends React.Component {
           <div>{this.props.reviewData.reply_content}</div>
         </div>
       )
-
     }
   }
 }
