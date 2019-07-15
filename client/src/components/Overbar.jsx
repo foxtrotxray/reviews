@@ -1,4 +1,3 @@
-
 import StarDisplay from  './starDisplay.jsx'
 import React from 'react';
 import Searchbar from './Searchbar.jsx'
@@ -12,6 +11,7 @@ function Overbar (props) {
     <span>
     <StarDisplay starCount={props.reviewScore}/>
     </span>
+
   </div>
   )
 }

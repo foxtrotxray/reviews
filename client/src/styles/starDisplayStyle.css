@@ -1,12 +1,14 @@
 
 .starDisplay {
-  display: -webkit-box;
+  display: flex;
   border: rebeccapurple solid 2px;
   min-width: 110px;
+  flex-direction: row;
 }
 .star {
-  display: grid;
+  display: inline-block;
   width:18px;
   height:18px;
   margin: 2px;
+  flex-direction: column;
 }

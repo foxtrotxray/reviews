@@ -6,9 +6,7 @@ faker.seed(0);
 function dateToMySqlDatetime (date) {
   return date.toISOString().slice(0, 19).replace('T', ' ')
 }
-function input (val, chance) {
- return chance > 0.8 ? val: null;
-}
+
 function buildListing () {
   return {
     "location_name": faker.address.streetAddress(),
@@ -23,24 +21,36 @@ function buildListing () {
     "value_score": faker.random.number(5)
   }
 }
-function buildReview (listing_id) {
-  let replyChance = Math.random()
+
+function buildReview (listing_id, replyChance = 0.2) {
+  let replyDate = null;
+  let replyContent = null;
+
+  if (Math.random() > (1.0 - replyChance)) {
+    replyDate = dateToMySqlDatetime(faker.date.past());
+    replyContent = faker.lorem.paragraph();
+  }
+
   return {
     "author": faker.name.findName(),
     "icon_url": faker.image.avatar(),
     "review_date": dateToMySqlDatetime(faker.date.past()),
     "review_content": faker.lorem.paragraph(),
-    "reply_date": input(dateToMySqlDatetime(faker.date.past()), replyChance),
-    "reply_content": input(faker.lorem.paragraph(), replyChance),
+    "reply_date": replyDate,
+    "reply_content": replyContent,
     "listings_id": listing_id
   }
 }
 
+// Example:
+//   objToInsert({foo: 'bar', fizz: 'bu"zz'}, 'example')
+//   => "INSERT INTO example (`foo`,`fizz`) VALUES ('bar','bu\"zz')"
 function objToInsert (obj, table) {
   var columns = Object.keys(obj).map((val) => '`' + val + '`').join(',')
   var values = Object.values(obj).map(mysql.escape).join(',')
   return `INSERT INTO ${table} (${columns}) VALUES (${values});`
 }
+
  // potentally we want to extract this "pool creation" elsewhere, so if another developer intends
  // to "seed" the database they would have a single file to modify to their credentials
 async function main () {
